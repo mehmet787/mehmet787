@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 import streamlit as st
 
 # Excel dosyasını oku
@@ -37,13 +38,24 @@ st.write("KM sütunundaki X sayısı:", KM_count)
 st.write("K sütunundaki X sayısı:", K_count)
 st.write("KK sütunundaki X sayısı:", KK_count)
 
-# Grafik oluştur
+# Radar grafiği için verileri hazırla
 labels = ['KKM', 'KM', 'K', 'KK']
 counts = [KKM_count, KM_count, K_count, KK_count]
 
-fig, ax = plt.subplots()
-ax.bar(labels, counts, color=['blue', 'orange', 'green', 'red'])
-ax.set_ylabel('X Sayısı')
+# Radar grafiği oluştur
+angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
+counts += counts[:1]  # İlk değeri tekrar ekleyerek grafiği kapat
+angles += angles[:1]
+
+fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(polar=True))
+ax.fill(angles, counts, color='orange', alpha=0.25)
+ax.plot(angles, counts, color='orange', linewidth=2)
+
+# Etiketleri ayarla
+ax.set_yticklabels([])
+ax.set_xticks(angles[:-1])
+ax.set_xticklabels(labels)
+
 ax.set_title('Sütunlardaki X Değerlerinin Sayısı')
 
 # Grafiği Streamlit'te göster
