@@ -20,6 +20,26 @@ count_X_vectorized(df_strateji, 15, 24, 25)
 count_X_vectorized(df_strateji, 27, 36, 37)
 count_X_vectorized(df_strateji, 39, 57, 58)
 
+# Sonuçları al
+KKM_count = df_strateji.loc[13, 'KKM']
+KM_count = df_strateji.loc[13, 'KM']
+K_count = df_strateji.loc[13, 'K']
+KK_count = df_strateji.loc[13, 'KK']
+
+# Kontrol: Değişkenlerin değerlerini yazdır
+print("KKM Count:", KKM_count)
+print("KM Count:", KM_count)
+print("K Count:", K_count)
+print("KK Count:", KK_count)
+
+# Streamlit arayüzü
+st.title("X Değerleri Sayımı - Radar Grafiği")
+
+# Sonuçları göster
+st.write("KKM sütunundaki X sayısı:", KKM_count)
+st.write("KM sütunundaki X sayısı:", KM_count)
+st.write("K sütunundaki X sayısı:", K_count)
+st.write("KK sütunundaki X sayısı:", KK_count)
 
 # Radar grafiği için verileri hazırla
 labels = ['KKM', 'KM', 'K', 'KK']
@@ -41,8 +61,9 @@ ax.set_xticklabels(labels)
 
 ax.set_title('Sütunlardaki X Değerlerinin Sayısı - Radar Grafiği')
 
-# Grafiği göster
+# Grafiği Streamlit'te göster
 st.pyplot(fig)
+
 
 
 
