@@ -20,11 +20,6 @@ count_X_vectorized(df_strateji, 15, 24, 25)
 count_X_vectorized(df_strateji, 27, 36, 37)
 count_X_vectorized(df_strateji, 39, 57, 58)
 
-# Sonuçları al
-KKM_count = df_strateji.loc[13, 'KKM']
-KM_count = df_strateji.loc[13, 'KM']
-K_count = df_strateji.loc[13, 'K']
-KK_count = df_strateji.loc[13, 'KK']
 
 # Streamlit arayüzü
 st.title("X Değerleri Sayımı - Radar Grafiği")
