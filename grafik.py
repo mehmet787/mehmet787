@@ -7,30 +7,21 @@ import streamlit as st
 file_path = r'C:\Users\it.stajyer\Desktop\Dijital_Olgunluk.xlsx'
 df_strateji = pd.read_excel(file_path, sheet_name='1-Strateji')
 
+def count_X_vectorized(df, start, end, label):
+    subset = df.loc[start:end, ['KKM', 'KM', 'K', 'KK']]
+    counts = (subset == 'X').sum()
+
+    # Sonuçları belirtilen satıra ekle
+    df.loc[label, ['KKM', 'KM', 'K', 'KK']] = counts
+
 # X sayımlarını hesapla
-KKM_count = 0
-KM_count = 0
-K_count = 0
-KK_count = 0
-
-for i in range(3, 13):
-    if df_strateji.loc[i, 'KKM'] == 'X':
-        KKM_count += 1
-    if df_strateji.loc[i, 'KM'] == 'X':
-        KM_count += 1
-    if df_strateji.loc[i, 'K'] == 'X':
-        K_count += 1
-    if df_strateji.loc[i, 'KK'] == 'X':
-        KK_count += 1
-
-# Sonuçları DataFrame'e yaz
-df_strateji.loc[13, 'KKM'] = KKM_count
-df_strateji.loc[13, 'KM'] = KM_count
-df_strateji.loc[13, 'K'] = K_count
-df_strateji.loc[13, 'KK'] = KK_count
+count_X_vectorized(df_strateji, 3, 13, 13)
+count_X_vectorized(df_strateji, 15, 24, 25)
+count_X_vectorized(df_strateji, 27, 36, 37)
+count_X_vectorized(df_strateji, 39, 57, 58)
 
 # Streamlit arayüzü
-st.title("X Değerleri Sayımı")
+st.title("X Değerleri Sayımı - Radar Grafiği")
 
 # Sonuçları göster
 st.write("KKM sütunundaki X sayısı:", KKM_count)
@@ -56,9 +47,10 @@ ax.set_yticklabels([])
 ax.set_xticks(angles[:-1])
 ax.set_xticklabels(labels)
 
-ax.set_title('Sütunlardaki X Değerlerinin Sayısı')
+ax.set_title('Sütunlardaki X Değerlerinin Sayısı - Radar Grafiği')
 
 # Grafiği Streamlit'te göster
 st.pyplot(fig)
+
 
 
