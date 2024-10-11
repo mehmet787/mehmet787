@@ -10,7 +10,7 @@ df_strateji = pd.read_excel(file_path, sheet_name='1-Strateji')
 def count_X_vectorized(df, start, end, label):
     subset = df.loc[start:end, ['KKM', 'KM', 'K', 'KK']]
     counts = (subset == 'X').sum()
-    
+
     # Sonuçları belirtilen satıra ekle
     df.loc[label, ['KKM', 'KM', 'K', 'KK']] = counts
 
@@ -20,15 +20,6 @@ count_X_vectorized(df_strateji, 15, 24, 25)
 count_X_vectorized(df_strateji, 27, 36, 37)
 count_X_vectorized(df_strateji, 39, 57, 58)
 
-
-# Streamlit arayüzü
-st.title("X Değerleri Sayımı - Radar Grafiği")
-
-# Sonuçları göster
-st.write("KKM sütunundaki X sayısı:", KKM_count)
-st.write("KM sütunundaki X sayısı:", KM_count)
-st.write("K sütunundaki X sayısı:", K_count)
-st.write("KK sütunundaki X sayısı:", KK_count)
 
 # Radar grafiği için verileri hazırla
 labels = ['KKM', 'KM', 'K', 'KK']
@@ -50,7 +41,7 @@ ax.set_xticklabels(labels)
 
 ax.set_title('Sütunlardaki X Değerlerinin Sayısı - Radar Grafiği')
 
-# Grafiği Streamlit'te göster
+# Grafiği göster
 st.pyplot(fig)
 
 
